@@ -93,36 +93,29 @@ window.onclick = function(event) {
 
 // Handle Form Submission
 document.getElementById('paymentForm').addEventListener('submit', async (e) => {
-  e.preventDefault();
+  e.preventDefault(); // <--- THIS stops the page from reloading/redirecting
   
   const phone = document.getElementById('mpesaPhone').value;
   const statusDiv = document.getElementById('paymentStatus');
-  const submitBtn = e.target.querySelector('button');
-
-  statusDiv.innerText = "Initiating payment...";
-  statusDiv.style.color = "var(--text-mid)";
-  submitBtn.disabled = true;
+  
+  statusDiv.innerText = "Processing...";
 
   try {
     const response = await fetch('/api/stkPush', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ phone, amount: currentAmount })
+      body: JSON.stringify({ phone: phone, amount: 1 }) // Testing with 1 Shilling
     });
 
     const result = await response.json();
-
+    console.log(result); // View this in your browser Inspect -> Console
+    
     if (result.ResponseCode === "0") {
-      statusDiv.innerText = "Prompt sent! Check your phone to complete payment.";
-      statusDiv.style.color = "var(--green-light)";
+      statusDiv.innerText = "Check your phone for the PIN prompt!";
     } else {
-      statusDiv.innerText = "Error: " + (result.CustomerMessage || "Please try again.");
-      statusDiv.style.color = "red";
-      submitBtn.disabled = false;
+      statusDiv.innerText = "Error: " + result.CustomerMessage;
     }
-  } catch (err) {
-    statusDiv.innerText = "Connection error. Please try again later.";
-    statusDiv.style.color = "red";
-    submitBtn.disabled = false;
+  } catch (error) {
+    statusDiv.innerText = "Check your Vercel Logs for errors.";
   }
 });
