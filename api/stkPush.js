@@ -36,7 +36,7 @@ export default async function handler(req, res) {
         PartyA: phone, // Must be 254XXXXXXXXX
         PartyB: shortcode,
         PhoneNumber: phone,
-        CallBackURL: "https://your-vercel-domain.vercel.app/api/callback", 
+        CallBackURL: "https://upskale-web.vercel.app/api/callback", 
         AccountReference: "UpskaleSession",
         TransactionDesc: "Payment for Consultation"
       })
