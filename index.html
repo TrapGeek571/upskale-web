@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Upskale — Expert Business Advice for Kenyan SMEs</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <nav>
+    <div class="nav-logo">
+        <a href="/">
+          <img src="assets/logo.jpg" alt="Upskale Logo" class="logo-img">
+        </a>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#how">How It Works</a></li>
+      <li><a href="#consultants">Consultants</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <button onclick="openPaymentModal(3000)" class="btn-primary">Book a Session</button>
+    </ul>
+    <div class="hamburger" onclick="toggleMenu(this)">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-tag">Kenya's SME Consulting Marketplace</div>
+        <h1>Expert Business<br/>Advice for<br/><em>KES 3,000</em></h1>
+        <p class="hero-sub">
+          Connect with vetted business consultants. Book a 1-on-1 Zoom session, pay via M-Pesa, and walk away with a clear plan in under an hour.
+        </p>
+        <div class="hero-actions">
+          <a href="#consultants" class="btn-primary">Browse Consultants</a>
+          <a href="#how" class="btn-outline">See How It Works</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <div class="stat-num">5+</div>
+            <div class="stat-label">Expert Consultants</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">60<span style="font-size:1.2rem">min</span></div>
+            <div class="stat-label">Per Session</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">M-Pesa</div>
+            <div class="stat-label">Easy Payment</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-card">
+          <div class="hero-card-title">Available This Week</div>
+          <div class="session-preview">
+            <div class="session-item">
+              <div class="session-avatar">JM</div>
+              <div class="session-info">
+                <div class="session-name">James Mwangi</div>
+                <div class="session-role">Business Strategy</div>
+              </div>
+              <div class="session-badge">Open</div>
+            </div>
+            <div class="session-item">
+              <div class="session-avatar">CO</div>
+              <div class="session-info">
+                <div class="session-name">Caroline Otieno</div>
+                <div class="session-role">Financial Advisory</div>
+              </div>
+              <div class="session-badge">Open</div>
+            </div>
+            <div class="session-item">
+              <div class="session-avatar">MK</div>
+              <div class="session-info">
+                <div class="session-name">Michael Kipchoge</div>
+                <div class="session-role">Marketing & Growth</div>
+              </div>
+              <div class="session-badge">Open</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="how" id="how">
+    <div style="max-width:1200px;margin:0 auto;">
+      <div class="reveal">
+        <p class="section-label">Simple Process</p>
+        <h2 class="section-title">From question to<br/>clarity in 4 steps</h2>
+        <p class="section-sub">No long intake forms. No agency retainers. Just honest expert advice when you need it.</p>
+      </div>
+      <div class="steps-grid reveal">
+        <div class="step">
+          <div class="step-num">01</div>
+          <div class="step-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+          </div>
+          <div class="step-title">Choose a Consultant</div>
+          <p class="step-desc">Browse verified experts by specialty — strategy, finance, marketing, operations, and legal. Pick the one that fits your challenge.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <div class="step-icon">
+            <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+          </div>
+          <div class="step-title">Book Your Time</div>
+          <p class="step-desc">Select a time slot from their live Calendly calendar. A Zoom meeting link is automatically generated for your session.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <div class="step-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M9 12l2 2 4-4"/></svg>
+          </div>
+          <div class="step-title">Pay via M-Pesa</div>
+          <p class="step-desc">Send payment to our Paybill using your booking reference. We confirm within 30 minutes via WhatsApp and activate your session.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">04</div>
+          <div class="step-icon">
+            <svg viewBox="0 0 24 24"><path d="M15 10l4.553-2.069A1 1 0 0121 8.87v6.26a1 1 0 01-1.447.9L15 14"/><rect x="3" y="7" width="12" height="10" rx="2"/></svg>
+          </div>
+          <div class="step-title">Attend Your Session</div>
+          <p class="step-desc">Join your Zoom call at the booked time. 60 minutes of focused, expert advice tailored to your specific business challenge.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">05</div>
+          <div class="step-icon">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+          </div>
+          <div class="step-title">Get Your Action Plan</div>
+          <p class="step-desc">Your consultant follows up with a concise action summary via WhatsApp — key decisions, next steps, and resources to move forward.</p>
+        </div>
+        <div class="step" style="background: var(--green-deep); display:flex; flex-direction:column; justify-content:center; align-items:flex-start;">
+          <p style="font-family:'Cormorant Garamond',serif; font-size:1.4rem; font-weight:700; color:var(--white); line-height:1.3; margin-bottom:1rem;">"The clarity I needed<br/>in one session."</p>
+          <p style="font-size:0.8rem; color:rgba(255,255,255,0.45); margin-bottom:1.5rem;">SME Owner, Nairobi</p>
+          <a href="#consultants" class="btn-primary" style="font-size:0.85rem; padding:0.75rem 1.5rem;">Book Now →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="consultants" id="consultants">
+    <div class="consultants-inner">
+      <div class="reveal">
+        <p class="section-label">Our Consultants</p>
+        <h2 class="section-title">Meet your experts</h2>
+        <p class="section-sub">Every consultant on Upskale is vetted. Real experience. Real results. No generalists.</p>
+      </div>
+      <div class="consultants-grid reveal">
+
+        <div class="consultant-card">
+          <div class="consultant-avatar">JM</div>
+          <div class="consultant-role">Business Strategy</div>
+          <div class="consultant-name">James Mwangi</div>
+          <div class="consultant-exp">9 years experience · Nairobi</div>
+          <p class="consultant-bio">Former corporate strategist turned SME advisor. Has guided 50+ Kenyan businesses through growth planning, market entry, and investor-ready positioning.</p>
+          <div class="consultant-tags">
+            <span class="tag">Growth Planning</span>
+            <span class="tag">Market Entry</span>
+            <span class="tag">Investor Pitch</span>
+          </div>
+          <a href="https://calendly.com/upskale/james-mwangi" target="_blank" class="card-cta">Book James →</a>
+        </div>
+
+        <div class="consultant-card">
+          <div class="consultant-avatar">CO</div>
+          <div class="consultant-role">Financial Advisory</div>
+          <div class="consultant-name">Caroline Otieno</div>
+          <div class="consultant-exp">12 years experience · Nairobi</div>
+          <p class="consultant-bio">Certified Public Accountant with a background in banking and SME lending. Specialises in cash flow management, KRA compliance, and structuring businesses for growth capital.</p>
+          <div class="consultant-tags">
+            <span class="tag">Cash Flow</span>
+            <span class="tag">Tax & KRA</span>
+            <span class="tag">Fundraising</span>
+          </div>
+          <a href="https://calendly.com/upskale/caroline-otieno" target="_blank" class="card-cta">Book Caroline →</a>
+        </div>
+
+        <div class="consultant-card">
+          <div class="consultant-avatar">MK</div>
+          <div class="consultant-role">Marketing & Digital Growth</div>
+          <div class="consultant-name">Michael Kipchoge</div>
+          <div class="consultant-exp">7 years experience · Nairobi</div>
+          <p class="consultant-bio">Digital growth strategist with a track record across FMCG, retail, and fintech. Helps SMEs build brand visibility and customer acquisition systems on lean budgets.</p>
+          <div class="consultant-tags">
+            <span class="tag">Social Media</span>
+            <span class="tag">Paid Ads</span>
+            <span class="tag">Brand Identity</span>
+          </div>
+          <a href="https://calendly.com/upskale/michael-kipchoge" target="_blank" class="card-cta">Book Michael →</a>
+        </div>
+
+        <div class="consultant-card">
+          <div class="consultant-avatar">LN</div>
+          <div class="consultant-role">Operations & Process</div>
+          <div class="consultant-name">Lilian Njoroge</div>
+          <div class="consultant-exp">8 years experience · Mombasa</div>
+          <p class="consultant-bio">Operations specialist and certified Lean practitioner. Has helped logistics, retail, and manufacturing SMEs cut costs, streamline processes, and build teams that scale.</p>
+          <div class="consultant-tags">
+            <span class="tag">Lean Ops</span>
+            <span class="tag">Team Scaling</span>
+            <span class="tag">Process Design</span>
+          </div>
+          <a href="https://calendly.com/upskale/lilian-njoroge" target="_blank" class="card-cta">Book Lilian →</a>
+        </div>
+
+        <div class="consultant-card">
+          <div class="consultant-avatar">SB</div>
+          <div class="consultant-role">Legal & Compliance</div>
+          <div class="consultant-name">Samuel Barasa</div>
+          <div class="consultant-exp">10 years experience · Nairobi</div>
+          <p class="consultant-bio">Commercial lawyer with deep expertise in Kenyan company law, contract drafting, and regulatory compliance. Trusted by early-stage and scaling SMEs across multiple sectors.</p>
+          <div class="consultant-tags">
+            <span class="tag">Contracts</span>
+            <span class="tag">Company Law</span>
+            <span class="tag">Compliance</span>
+          </div>
+          <a href="https://calendly.com/upskale/samuel-barasa" target="_blank" class="card-cta">Book Samuel →</a>
+        </div>
+
+        <div class="consultant-card" style="display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center; border: 1px dashed rgba(201,168,76,0.2);">
+          <div style="font-size:2rem;margin-bottom:1rem;">🤝</div>
+          <p style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:700;color:var(--white);margin-bottom:0.5rem;">Are you an expert?</p>
+          <p style="font-size:0.8rem;color:rgba(255,255,255,0.45);margin-bottom:1.25rem;line-height:1.6;">Join Upskale as a consultant and earn KES 2,100 per session on your own schedule.</p>
+          <a href="mailto:hello@upskale.co.ke" style="font-size:0.8rem;color:var(--gold);text-decoration:none;font-weight:600;letter-spacing:0.04em;">Apply to Consult →</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="pricing" id="pricing">
+    <div class="pricing-inner">
+      <div class="reveal">
+        <p class="section-label">Simple Pricing</p>
+        <h2 class="section-title">Transparent. No surprises.</h2>
+        <p class="section-sub">No subscriptions. No contracts. Pay per session or save with a monthly package.</p>
+      </div>
+      <div class="pricing-grid reveal">
+
+        <div class="price-card">
+          <div class="price-name">Starter Session</div>
+          <div class="price-amount"><span class="price-currency">KES </span>3,000</div>
+          <div class="price-duration">60-minute Zoom session</div>
+          <ul class="price-features">
+            <li>1-on-1 with a vetted consultant</li>
+            <li>You set the agenda</li>
+            <li>WhatsApp action summary after</li>
+            <li>Pay via M-Pesa (instant)</li>
+          </ul>
+          <a href="#consultants" class="price-btn">Book a Session</a>
+        </div>
+
+        <div class="price-card featured">
+          <div class="price-badge">Most Popular</div>
+          <div class="price-name">Deep Dive</div>
+          <div class="price-amount"><span class="price-currency">KES </span>5,000</div>
+          <div class="price-duration">90-minute Zoom session</div>
+          <ul class="price-features">
+            <li>Extended working session</li>
+            <li>Pre-session brief review</li>
+            <li>Detailed written action plan</li>
+            <li>1 follow-up WhatsApp Q&A</li>
+          </ul>
+          <a href="#consultants" class="price-btn">Book a Deep Dive</a>
+        </div>
+
+        <div class="price-card">
+          <div class="price-name">Monthly Retainer</div>
+          <div class="price-amount"><span class="price-currency">KES </span>12,000</div>
+          <div class="price-duration">4 sessions per month</div>
+          <ul class="price-features">
+            <li>Same consultant every session</li>
+            <li>Priority booking slots</li>
+            <li>Ongoing WhatsApp support</li>
+            <li>Monthly progress review</li>
+          </ul>
+          <a href="mailto:hello@upskale.co.ke" class="price-btn">Contact Us</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="mpesa" id="mpesa">
+    <div class="mpesa-inner">
+      <div class="reveal">
+        <p class="section-label">M-Pesa Payment</p>
+        <h2 class="section-title">Pay in<br/>30 seconds</h2>
+        <p class="section-sub">No credit cards. No bank transfers. Just M-Pesa — the way Kenya does business.</p>
+        <div class="mpesa-detail" style="margin-top:2rem;">
+          <div class="mpesa-detail-row">
+            <span class="mpesa-key">Paybill Number</span>
+            <span class="mpesa-val">880100</span>
+          </div>
+          <div class="mpesa-detail-row">
+            <span class="mpesa-key">Account Number</span>
+            <span class="mpesa-val">1003247341</span>
+          </div>
+          <div class="mpesa-detail-row">
+            <span class="mpesa-key">Confirmation</span>
+            <span class="mpesa-val">Via WhatsApp</span>
+          </div>
+        </div>
+      </div>
+      <div class="mpesa-steps reveal">
+        <div class="mpesa-step">
+          <div class="mpesa-step-num">1</div>
+          <div class="mpesa-step-text">Go to <strong>M-Pesa → Lipa na M-Pesa → Pay Bill</strong></div>
+        </div>
+        <div class="mpesa-step">
+          <div class="mpesa-step-num">2</div>
+          <div class="mpesa-step-text">Enter <strong>Business No: 880100</strong></div>
+        </div>
+        <div class="mpesa-step">
+          <div class="mpesa-step-num">3</div>
+          <div class="mpesa-step-text">Enter <strong>Account No:100 324  7341</strong> from Calendly confirmation</div>
+        </div>
+        <div class="mpesa-step">
+          <div class="mpesa-step-num">4</div>
+          <div class="mpesa-step-text">Enter the <strong>session amount</strong> (KES 3,000, 5,000, or 12,000)</div>
+        </div>
+        <div class="mpesa-step">
+          <div class="mpesa-step-num">5</div>
+          <div class="mpesa-step-text">Send your <strong>M-Pesa confirmation SMS</strong> to us on WhatsApp: <strong>+254 746 003 734</strong></div>
+        </div>
+        <div class="mpesa-step">
+          <div class="mpesa-step-num">6</div>
+          <div class="mpesa-step-text">We confirm your booking and your <strong>Zoom link is activated.</strong> ✓</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="trust">
+    <div class="trust-inner">
+      <div class="trust-item">
+        <div class="trust-icon">✅</div>
+        <div class="trust-title">Vetted Consultants</div>
+        <p class="trust-desc">Every expert is manually reviewed for credentials and experience before joining Upskale.</p>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">🔒</div>
+        <div class="trust-title">Secure Payments</div>
+        <p class="trust-desc">M-Pesa is Kenya's most trusted payment system. Your money is safe before sessions are confirmed.</p>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">⚡</div>
+        <div class="trust-title">Fast Confirmation</div>
+        <p class="trust-desc">Payment confirmed and session activated within 30 minutes. Every booking, every time.</p>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">💬</div>
+        <div class="trust-title">WhatsApp Support</div>
+        <p class="trust-desc">Real human support via WhatsApp. Questions, changes, or concerns — we respond fast.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-banner" id="book">
+    <h2>Your business questions deserve<br/>real answers.</h2>
+    <p>Book a session today. Pay via M-Pesa. Get clarity in 60 minutes.</p>
+    <a href="#consultants" class="btn-dark">Browse Consultants →</a>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand-name">Up<span>skale</span></div>
+        <p class="footer-brand-desc">Kenya's expert business consulting marketplace. Connecting SMEs with the advice they need to grow.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Platform</div>
+        <ul class="footer-links">
+          <li><a href="#how">How It Works</a></li>
+          <li><a href="#consultants">Browse Consultants</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#mpesa">M-Pesa Guide</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Get In Touch</div>
+        <ul class="footer-links">
+          <li><a href="https://wa.me/254746003734" target="_blank">WhatsApp Us</a></li>
+          <li><a href="mailto:hello@upskale.co.ke">hello@upskale.co.ke</a></li>
+          <li><a href="mailto:hello@upskale.co.ke">Join as a Consultant</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 Upskale. All rights reserved.</p>
+      <p class="footer-tagline">Built for Kenya's SMEs.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <div id="paymentModal" class="modal-overlay">
+  <div class="modal-content">
+    <span class="close-modal" onclick="closePaymentModal()">&times;</span>
+    <h3>Confirm Booking</h3>
+    <p>Enter your M-Pesa number to receive the payment prompt.</p>
+    
+    <form id="paymentForm">
+      <div class="input-group">
+        <label for="mpesaPhone">M-Pesa Number</label>
+        <input type="text" id="mpesaPhone" placeholder="2547XXXXXXXX" required pattern="254[0-9]{9}">
+        <small>Format: 254712345678</small>
+      </div>
+      
+      <div class="payment-summary">
+        <span>Consultation Fee:</span>
+        <strong id="modalAmount">KES 3,000</strong>
+      </div>
+
+      <button type="submit" class="btn-primary" style="width: 100%;">Pay via M-Pesa</button>
+    </form>
+    
+    <div id="paymentStatus" class="status-msg"></div>
+  </div>
+</div>
+</body>
+</html>
