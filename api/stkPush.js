@@ -2,55 +2,31 @@
 import { Buffer } from 'buffer';
 import fetch from 'node-fetch';
 export default async function handler(req, res) {
-  if (req.method !== 'POST') return res.status(405).send('Method Not Allowed');
-
-  const { phone, amount } = req.body;
-  const shortcode = process.env.MPESA_SHORTCODE;
-  const passkey = process.env.MPESA_PASSKEY;
   const consumerKey = process.env.MPESA_CONSUMER_KEY;
   const consumerSecret = process.env.MPESA_CONSUMER_SECRET;
 
+  if (!consumerKey || !consumerSecret) {
+    return res.status(500).json({ error: "Keys are missing in Vercel Settings" });
+  }
+
+  const url = "https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials";
+  const auth = Buffer.from(`${consumerKey}:${consumerSecret}`).toString("base64");
+
   try {
-    // 1. Get Access Token
-    const auth = Buffer.from(`${process.env.MPESA_CONSUMER_KEY}:${process.env.MPESA_CONSUMER_SECRET}`).toString('base64');
-    const response = await fetch(url, 
-    {
-      method: 'GET',
-      headers: {
-        'Authorization': `Basic $
-    {auth}`
-      }
-    });
-    const { access_token } = await tokenResponse.json();
-
-    // 2. Generate Password & Timestamp
-    const timestamp = new Date().toISOString().replace(/[-:T.Z]/g, "").slice(0, 14);
-    const password = Buffer.from(shortcode + passkey + timestamp).toString('base64');
-
-    // 3. Initiate STK Push
-    const stkResponse = await fetch('https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${access_token}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        BusinessShortCode: shortcode,
-        Password: password,
-        Timestamp: timestamp,
-        TransactionType: "CustomerPayBillOnline", // or CustomerBuyGoodsOnline
-        Amount: amount,
-        PartyA: phone, // Must be 254XXXXXXXXX
-        PartyB: shortcode,
-        PhoneNumber: phone,
-        CallBackURL: "https://upskale-web.vercel.app/api/callback", 
-        AccountReference: "UpskaleSession",
-        TransactionDesc: "Payment for Consultation"
-      })
+    const response = await fetch(url, {
+      method: "GET",
+      headers: { Authorization: `Basic ${auth}` },
     });
 
-    const data = await stkResponse.json();
-    res.status(200).json(data);
+    const data = await response.json();
+    
+    if (!response.ok) {
+      console.error("Safaricom Auth Error:", data);
+      return res.status(400).json({ error: "Safaricom rejected your keys", details: data });
+    }
+
+    const accessToken = data.access_token;
+    // ... continue with the STK Push logic using the accessToken
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
