@@ -16,7 +16,7 @@
   <nav>
     <div class="nav-logo">
         <a href="/">
-          <img src="assets/logo.jpg" alt="Upskale Logo" class="logo-img">
+          <img src="assets/logo.png" alt="Upskale Logo" class="logo-img">
         </a>
     </div>
     <ul class="nav-links">
@@ -168,7 +168,7 @@
             <span class="tag">Market Entry</span>
             <span class="tag">Investor Pitch</span>
           </div>
-          <a href="https://calendly.com/upskale/james-mwangi" target="_blank" class="card-cta">Book James →</a>
+          <button onclick="document.getElementById('paymentModal').style.display='flex'" class="card-cta" style="width:100%; border:none; cursor:pointer;">Book James →</button>
         </div>
 
         <div class="consultant-card">
@@ -182,7 +182,7 @@
             <span class="tag">Tax & KRA</span>
             <span class="tag">Fundraising</span>
           </div>
-          <a href="https://calendly.com/upskale/caroline-otieno" target="_blank" class="card-cta">Book Caroline →</a>
+          <button onclick="document.getElementById('paymentModal').style.display='flex'" class="card-cta" style="width:100%; border:none; cursor:pointer;">Book Caroline →</button>
         </div>
 
         <div class="consultant-card">
@@ -196,7 +196,7 @@
             <span class="tag">Paid Ads</span>
             <span class="tag">Brand Identity</span>
           </div>
-          <a href="https://calendly.com/upskale/michael-kipchoge" target="_blank" class="card-cta">Book Michael →</a>
+          <button onclick="document.getElementById('paymentModal').style.display='flex'" class="card-cta" style="width:100%; border:none; cursor:pointer;">Book Michael →</button>
         </div>
 
         <div class="consultant-card">
@@ -210,7 +210,7 @@
             <span class="tag">Team Scaling</span>
             <span class="tag">Process Design</span>
           </div>
-          <a href="https://calendly.com/upskale/lilian-njoroge" target="_blank" class="card-cta">Book Lilian →</a>
+          <button onclick="document.getElementById('paymentModal').style.display='flex'" class="card-cta" style="width:100%; border:none; cursor:pointer;">Book Lilian →</button>
         </div>
 
         <div class="consultant-card">
@@ -224,7 +224,7 @@
             <span class="tag">Company Law</span>
             <span class="tag">Compliance</span>
           </div>
-          <a href="https://calendly.com/upskale/samuel-barasa" target="_blank" class="card-cta">Book Samuel →</a>
+          <button onclick="document.getElementById('paymentModal').style.display='flex'" class="card-cta" style="width:100%; border:none; cursor:pointer;">Book Samuel →</button>
         </div>
 
         <div class="consultant-card" style="display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center; border: 1px dashed rgba(201,168,76,0.2);">
@@ -257,7 +257,7 @@
             <li>WhatsApp action summary after</li>
             <li>Pay via M-Pesa (instant)</li>
           </ul>
-          <a href="#consultants" class="price-btn">Book a Session</a>
+          <button onclick="document.getElementById('paymentModal').style.display='flex'" class="price-btn">Book a Session</button>
         </div>
 
         <div class="price-card featured">
@@ -271,7 +271,7 @@
             <li>Detailed written action plan</li>
             <li>1 follow-up WhatsApp Q&A</li>
           </ul>
-          <a href="#consultants" class="price-btn">Book a Deep Dive</a>
+          <button onclick="document.getElementById('paymentModal').style.display='flex'" class="price-btn">Book a Deep Dive</button>
         </div>
 
         <div class="price-card">
@@ -402,30 +402,28 @@
     </div>
   </footer>
 
-  <script src="script.js"></script>
-  <div id="paymentModal" class="modal-overlay">
-  <div class="modal-content">
-    <span class="close-modal" onclick="closePaymentModal()">&times;</span>
-    <h3>Confirm Booking</h3>
-    <p>Enter your M-Pesa number to receive the payment prompt.</p>
+  
+  <div id="paymentModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.8); z-index:1000; display:flex; align-items:center; justify-content:center;">
+  <div style="background:white; padding:2rem; border-radius:8px; max-width:400px; width:90%; color:#0B3D2E;">
+    <h3 style="margin-bottom:1rem; font-family:'Cormorant Garamond', serif; font-size:1.5rem;">Confirm Your Booking</h3>
+    <p style="font-size:0.9rem; margin-bottom:1.5rem;">Enter your M-Pesa number (2547...) to receive the payment prompt.</p>
     
     <form id="paymentForm">
-      <div class="input-group">
-        <label for="mpesaPhone">M-Pesa Number</label>
-        <input type="text" id="mpesaPhone" placeholder="2547XXXXXXXX" required pattern="254[0-9]{9}">
-        <small>Format: 254712345678</small>
-      </div>
+      <input type="tel" id="mpesaPhone" placeholder="2547XXXXXXXX" required 
+             style="width:100%; padding:0.8rem; border:1px solid #ccc; border-radius:4px; margin-bottom:1rem;">
       
-      <div class="payment-summary">
-        <span>Consultation Fee:</span>
-        <strong id="modalAmount">KES 3,000</strong>
-      </div>
-
-      <button type="submit" class="btn-primary" style="width: 100%;">Pay via M-Pesa</button>
+      <button type="submit" style="width:100%; background:#C9A84C; color:#0B3D2E; padding:0.9rem; border:none; border-radius:4px; font-weight:600; cursor:pointer;">
+        Pay KES 3,000 via M-Pesa
+      </button>
     </form>
     
-    <div id="paymentStatus" class="status-msg"></div>
+    <div id="paymentStatus" style="margin-top:1rem; font-size:0.85rem; text-align:center; font-weight:500;"></div>
+    <button onclick="document.getElementById('paymentModal').style.display='none'" 
+            style="display:block; margin:1rem auto 0; background:none; border:none; color:#777; cursor:pointer; font-size:0.8rem;">
+      Cancel
+    </button>
   </div>
 </div>
+<script src="script.js"></script>
 </body>
 </html>

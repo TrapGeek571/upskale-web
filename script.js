@@ -1,20 +1,23 @@
 // Scroll reveal
-const reveals = document.querySelectorAll('.reveal');
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry, i) => {
-    if (entry.isIntersecting) {
-      setTimeout(() => entry.target.classList.add('visible'), i * 80);
-      observer.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.1 });
-reveals.forEach(el => observer.observe(el));
+const reveals = document.querySelectorAll(".reveal");
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add("visible"), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  },
+  { threshold: 0.1 },
+);
+reveals.forEach((el) => observer.observe(el));
 
 // Mobile menu
 let menuOpen = false;
 function toggleMenu(btn) {
   menuOpen = !menuOpen;
-  const links = document.querySelector('.nav-links');
+  const links = document.querySelector(".nav-links");
   if (menuOpen) {
     links.style.cssText = `
       display: flex;
@@ -28,22 +31,22 @@ function toggleMenu(btn) {
       backdrop-filter: blur(12px);
       z-index: 99;
     `;
-    btn.children[0].style.transform = 'rotate(45deg) translateY(7px)';
-    btn.children[1].style.opacity = '0';
-    btn.children[2].style.transform = 'rotate(-45deg) translateY(-7px)';
+    btn.children[0].style.transform = "rotate(45deg) translateY(7px)";
+    btn.children[1].style.opacity = "0";
+    btn.children[2].style.transform = "rotate(-45deg) translateY(-7px)";
   } else {
-    links.style.display = 'none';
-    btn.children[0].style.transform = '';
-    btn.children[1].style.opacity = '';
-    btn.children[2].style.transform = '';
+    links.style.display = "none";
+    btn.children[0].style.transform = "";
+    btn.children[1].style.opacity = "";
+    btn.children[2].style.transform = "";
   }
 }
 
 // Close menu on nav link click
-document.querySelectorAll('.nav-links a').forEach(a => {
-  a.addEventListener('click', () => {
+document.querySelectorAll(".nav-links a").forEach((a) => {
+  a.addEventListener("click", () => {
     if (menuOpen) {
-      const ham = document.querySelector('.hamburger');
+      const ham = document.querySelector(".hamburger");
       toggleMenu(ham);
     }
   });
@@ -51,15 +54,15 @@ document.querySelectorAll('.nav-links a').forEach(a => {
 
 async function payWithMpesa(phoneNumber, amount) {
   try {
-    const response = await fetch('/api/stkPush', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+    const response = await fetch("/api/stkPush", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         phone: phoneNumber, // e.g., 254712345678
-        amount: amount
-      })
+        amount: amount,
+      }),
     });
-    
+
     const result = await response.json();
     if (result.ResponseCode === "0") {
       alert("Please check your phone for the M-Pesa prompt.");
@@ -73,49 +76,59 @@ async function payWithMpesa(phoneNumber, amount) {
 
 let currentAmount = 3000;
 
-function openPaymentModal(amount) {
-  currentAmount = amount;
-  document.getElementById('modalAmount').innerText = `KES ${amount.toLocaleString()}`;
-  document.getElementById('paymentModal').style.display = 'flex';
-}
-
-function closePaymentModal() {
-  document.getElementById('paymentModal').style.display = 'none';
-}
-
-// Close modal if user clicks outside of the content box
-window.onclick = function(event) {
-  const modal = document.getElementById('paymentModal');
-  if (event.target == modal) {
-    closePaymentModal();
+// Wrap modal-related code in DOMContentLoaded to ensure elements exist
+window.addEventListener("DOMContentLoaded", () => {
+  function openPaymentModal(amount) {
+    currentAmount = amount;
+    document.getElementById("modalAmount").innerText =
+      `KES ${amount.toLocaleString()}`;
+    document.getElementById("paymentModal").style.display = "flex";
   }
-}
 
-// Handle Form Submission
-document.getElementById('paymentForm').addEventListener('submit', async (e) => {
-  e.preventDefault(); // <--- THIS stops the page from reloading/redirecting
-  
-  const phone = document.getElementById('mpesaPhone').value;
-  const statusDiv = document.getElementById('paymentStatus');
-  
-  statusDiv.innerText = "Processing...";
+  function closePaymentModal() {
+    document.getElementById("paymentModal").style.display = "none";
+  }
 
-  try {
-    const response = await fetch('/api/stkPush', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ phone: phone, amount: 1 }) // Testing with 1 Shilling
+  // Close modal if user clicks outside of the content box
+  window.onclick = function (event) {
+    const modal = document.getElementById("paymentModal");
+    if (event.target == modal) {
+      closePaymentModal();
+    }
+  };
+
+  // Handle Form Submission
+  document
+    .getElementById("paymentForm")
+    .addEventListener("submit", async (e) => {
+      e.preventDefault(); // CRITICAL: Stops the 405 Method Not Allowed error
+
+      const statusDiv = document.getElementById("paymentStatus");
+      const phone = document.getElementById("mpesaPhone").value;
+
+      statusDiv.innerText = "Sending prompt...";
+
+      try {
+        const response = await fetch("/api/stkPush", {
+          method: "POST", // MUST be POST
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ phone: phone, amount: 1 }), // Amount for testing
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          statusDiv.innerText = "Check your phone for the M-Pesa PIN prompt!";
+        } else {
+          statusDiv.innerText =
+            "Error: " + (data.error || "Payment failed to initialize");
+        }
+      } catch (err) {
+        statusDiv.innerText = "Connection error. Check Vercel logs.";
+        console.error("Payment error:", err);}
     });
 
-    const result = await response.json();
-    console.log(result); // View this in your browser Inspect -> Console
-    
-    if (result.ResponseCode === "0") {
-      statusDiv.innerText = "Check your phone for the PIN prompt!";
-    } else {
-      statusDiv.innerText = "Error: " + result.CustomerMessage;
-    }
-  } catch (error) {
-    statusDiv.innerText = "Check your Vercel Logs for errors.";
-  }
+  // Make functions globally accessible
+  window.openPaymentModal = openPaymentModal;
+  window.closePaymentModal = closePaymentModal;
 });
