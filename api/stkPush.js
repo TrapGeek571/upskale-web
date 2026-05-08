@@ -1,4 +1,6 @@
 // api/stkPush.js
+import { Buffer } from 'buffer';
+import fetch from 'node-fetch';
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).send('Method Not Allowed');
 
@@ -10,9 +12,14 @@ export default async function handler(req, res) {
 
   try {
     // 1. Get Access Token
-    const auth = Buffer.from(`${consumerKey}:${consumerSecret}`).toString('base64');
-    const tokenResponse = await fetch('https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials', {
-      headers: { Authorization: `Basic ${auth}` }
+    const auth = Buffer.from(`${process.env.MPESA_CONSUMER_KEY}:${process.env.MPESA_CONSUMER_SECRET}`).toString('base64');
+    const response = await fetch(url, 
+    {
+      method: 'GET',
+      headers: {
+        'Authorization': `Basic $
+    {auth}`
+      }
     });
     const { access_token } = await tokenResponse.json();
 
