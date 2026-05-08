@@ -1,0 +1,21 @@
+{
+  "name": "upskale-web",
+  "version": "1.0.0",
+  "description": "Upskale web application with M-Pesa integration",
+  "main": "server.js",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "mpesa",
+    "consulting",
+    "kenya"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2"
+  }
+}

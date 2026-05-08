@@ -109,23 +109,24 @@ window.addEventListener("DOMContentLoaded", () => {
       statusDiv.innerText = "Sending prompt...";
 
       try {
-        const response = await fetch("/api/stkPush", {
-          method: "POST", // MUST be POST
+        const response = await fetch("http://localhost:3001/api/stkPush", {
+          method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ phone: phone, amount: 1 }), // Amount for testing
+          body: JSON.stringify({ phone: phone, amount: 1 }),
         });
 
-        const data = await response.json();
-
         if (response.ok) {
+          const data = await response.json();
           statusDiv.innerText = "Check your phone for the M-Pesa PIN prompt!";
+          console.log("Payment response:", data);
         } else {
-          statusDiv.innerText =
-            "Error: " + (data.error || "Payment failed to initialize");
+          statusDiv.innerText = "Error: Payment failed to initialize";
         }
       } catch (err) {
-        statusDiv.innerText = "Connection error. Check Vercel logs.";
-        console.error("Payment error:", err);}
+        statusDiv.innerText =
+          "Connection error. Make sure the backend server is running.";
+        console.error("Payment error:", err);
+      }
     });
 
   // Make functions globally accessible
