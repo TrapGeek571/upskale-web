@@ -97,6 +97,45 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   };
 
+  // Function to check payment status
+  async function checkPaymentStatus(paymentId) {
+    const apiBase =
+      window.location.hostname === "localhost" ||
+      window.location.hostname === "127.0.0.1"
+        ? "http://localhost:3001"
+        : "";
+
+    try {
+      const response = await fetch(`${apiBase}/api/payment-status?paymentId=${paymentId}`);
+      if (response.ok) {
+        const status = await response.json();
+        const statusDiv = document.getElementById("statusDiv");
+
+        if (status.status === "completed") {
+          statusDiv.innerText = `Payment successful! Receipt: ${status.receipt}`;
+          statusDiv.style.color = "green";
+          // Clear the stored payment ID
+          localStorage.removeItem('currentPaymentId');
+        } else if (status.status === "failed") {
+          statusDiv.innerText = `Payment failed: ${status.error || "Unknown error"}`;
+          statusDiv.style.color = "red";
+          localStorage.removeItem('currentPaymentId');
+        } else {
+          // Still pending, check again in 5 seconds
+          setTimeout(() => checkPaymentStatus(paymentId), 5000);
+        }
+      } else {
+        console.error("Failed to check payment status");
+        // Retry in 5 seconds
+        setTimeout(() => checkPaymentStatus(paymentId), 5000);
+      }
+    } catch (err) {
+      console.error("Error checking payment status:", err);
+      // Retry in 5 seconds
+      setTimeout(() => checkPaymentStatus(paymentId), 5000);
+    }
+  }
+
   // Handle Form Submission
   document
     .getElementById("paymentForm")
@@ -104,23 +143,55 @@ window.addEventListener("DOMContentLoaded", () => {
       e.preventDefault(); // CRITICAL: Stops the 405 Method Not Allowed error
 
       const statusDiv = document.getElementById("paymentStatus");
-      const phone = document.getElementById("mpesaPhone").value;
+      let phone = document.getElementById("mpesaPhone").value.trim();
+
+      if (!phone) {
+        statusDiv.innerText = "Please enter your M-Pesa phone number.";
+        return;
+      }
+
+      phone = phone.replace(/\+/g, "");
+      if (phone.startsWith("07")) {
+        phone = "254" + phone.slice(1);
+      }
+
+      if (!/^254\d{9}$/.test(phone)) {
+        statusDiv.innerText = "Enter a valid phone like 2547XXXXXXXX.";
+        return;
+      }
 
       statusDiv.innerText = "Sending prompt...";
 
       try {
-        const response = await fetch("http://localhost:3001/api/stkPush", {
+        const apiBase =
+          window.location.hostname === "localhost" ||
+          window.location.hostname === "127.0.0.1"
+            ? "http://localhost:3001"
+            : "";
+
+        const response = await fetch(`${apiBase}/api/stkPush`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ phone: phone, amount: 1 }),
+          body: JSON.stringify({ phone: phone, amount: currentAmount }),
         });
 
         if (response.ok) {
           const data = await response.json();
           statusDiv.innerText = "Check your phone for the M-Pesa PIN prompt!";
           console.log("Payment response:", data);
+
+          // Store payment ID for status checking
+          if (data.paymentId) {
+            localStorage.setItem('currentPaymentId', data.paymentId);
+            // Start checking payment status
+            checkPaymentStatus(data.paymentId);
+          }
         } else {
-          statusDiv.innerText = "Error: Payment failed to initialize";
+          const errorData = await response.json().catch(() => null);
+          statusDiv.innerText =
+            "Error: Payment failed to initialize" +
+            (errorData?.error ? ` (${errorData.error})` : "");
+          console.error("STK Push error response:", errorData);
         }
       } catch (err) {
         statusDiv.innerText =
@@ -132,4 +203,10 @@ window.addEventListener("DOMContentLoaded", () => {
   // Make functions globally accessible
   window.openPaymentModal = openPaymentModal;
   window.closePaymentModal = closePaymentModal;
+
+  // Check for any pending payment on page load
+  const pendingPaymentId = localStorage.getItem('currentPaymentId');
+  if (pendingPaymentId) {
+    checkPaymentStatus(pendingPaymentId);
+  }
 });
