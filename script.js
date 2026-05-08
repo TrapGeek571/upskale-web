@@ -106,7 +106,9 @@ window.addEventListener("DOMContentLoaded", () => {
         : "";
 
     try {
-      const response = await fetch(`${apiBase}/api/payment-status?paymentId=${paymentId}`);
+      const response = await fetch(
+        `${apiBase}/api/payment-status?paymentId=${paymentId}`,
+      );
       if (response.ok) {
         const status = await response.json();
         const statusDiv = document.getElementById("statusDiv");
@@ -115,11 +117,11 @@ window.addEventListener("DOMContentLoaded", () => {
           statusDiv.innerText = `Payment successful! Receipt: ${status.receipt}`;
           statusDiv.style.color = "green";
           // Clear the stored payment ID
-          localStorage.removeItem('currentPaymentId');
+          localStorage.removeItem("currentPaymentId");
         } else if (status.status === "failed") {
           statusDiv.innerText = `Payment failed: ${status.error || "Unknown error"}`;
           statusDiv.style.color = "red";
-          localStorage.removeItem('currentPaymentId');
+          localStorage.removeItem("currentPaymentId");
         } else {
           // Still pending, check again in 5 seconds
           setTimeout(() => checkPaymentStatus(paymentId), 5000);
@@ -182,7 +184,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
           // Store payment ID for status checking
           if (data.paymentId) {
-            localStorage.setItem('currentPaymentId', data.paymentId);
+            localStorage.setItem("currentPaymentId", data.paymentId);
             // Start checking payment status
             checkPaymentStatus(data.paymentId);
           }
@@ -205,7 +207,7 @@ window.addEventListener("DOMContentLoaded", () => {
   window.closePaymentModal = closePaymentModal;
 
   // Check for any pending payment on page load
-  const pendingPaymentId = localStorage.getItem('currentPaymentId');
+  const pendingPaymentId = localStorage.getItem("currentPaymentId");
   if (pendingPaymentId) {
     checkPaymentStatus(pendingPaymentId);
   }

@@ -1,5 +1,5 @@
 // api/callback.js
-const { paymentStatuses } = require('../shared/paymentStatuses');
+const { paymentStatuses } = require("../shared/paymentStatuses");
 
 module.exports = async function handler(req, res) {
   if (req.method !== "POST") {
