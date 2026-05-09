@@ -22,16 +22,18 @@ module.exports = async function handler(req, res) {
       ? "https://api.safaricom.co.ke"
       : "https://sandbox.safaricom.co.ke";
 
-  if (
-    !MPESA_SHORTCODE ||
-    !MPESA_PASSKEY ||
-    !MPESA_CONSUMER_KEY ||
-    !MPESA_CONSUMER_SECRET ||
-    !MPESA_CALLBACK_URL
-  ) {
-    return res
-      .status(500)
-      .json({ error: "M-Pesa configuration is incomplete" });
+  const missingEnv = [];
+  if (!MPESA_SHORTCODE) missingEnv.push("MPESA_SHORTCODE");
+  if (!MPESA_PASSKEY) missingEnv.push("MPESA_PASSKEY");
+  if (!MPESA_CONSUMER_KEY) missingEnv.push("MPESA_CONSUMER_KEY");
+  if (!MPESA_CONSUMER_SECRET) missingEnv.push("MPESA_CONSUMER_SECRET");
+  if (!MPESA_CALLBACK_URL) missingEnv.push("MPESA_CALLBACK_URL");
+
+  if (missingEnv.length > 0) {
+    return res.status(500).json({
+      error: "M-Pesa configuration is incomplete",
+      missing: missingEnv,
+    });
   }
 
   const { phone, amount } = req.body;
