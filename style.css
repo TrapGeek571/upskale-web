@@ -1163,8 +1163,8 @@ footer {
 
 .logo-img {
   /* Increase this number until the logo looks right to you */
-  height: auto; 
-  width: 180px; /* Adjust as needed to maintain aspect ratio */
+  height: auto;
+  width: 240px; /* Increased from 180px for better visibility */
   display: block;
   object-fit: contain;
 }
@@ -1173,7 +1173,7 @@ footer {
 @media (max-width: 768px) {
   .logo-img {
     height: 50px;
-    width: 135px;
+    width: 180px; /* Increased from 135px proportionally */
   }
 }
 
@@ -1210,7 +1210,7 @@ footer {
 }
 
 .modal-content h3 {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: "Cormorant Garamond", serif;
   font-size: 1.75rem;
   color: var(--green-deep);
   margin-bottom: 0.5rem;
@@ -1234,7 +1234,7 @@ footer {
   padding: 0.8rem;
   border: 1px solid var(--cream-dark);
   background: var(--white);
-  font-family: 'DM Sans', sans-serif;
+  font-family: "DM Sans", sans-serif;
   font-size: 1rem;
 }
 

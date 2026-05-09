@@ -82,6 +82,8 @@ window.addEventListener("DOMContentLoaded", () => {
     currentAmount = amount;
     document.getElementById("modalAmount").innerText =
       `KES ${amount.toLocaleString()}`;
+    document.getElementById("buttonAmount").innerText =
+      `KES ${amount.toLocaleString()}`;
     document.getElementById("paymentModal").style.display = "flex";
   }
 
