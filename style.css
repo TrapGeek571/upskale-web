@@ -1149,19 +1149,21 @@ footer {
   }
 
   .logo-intro {
-    min-height: 100vh;
-    padding: 0;
+    min-height: auto;
+    padding: 2rem 0;
   }
 
   .logo-intro-inner {
     height: auto;
-    padding: 2rem 0;
+    padding: 1rem 0;
   }
 
   .logo-intro-img {
-    width: 100%;
+    width: 90%;
     height: auto;
-    max-width: 100%;
+    max-width: 90%;
+    max-height: 65vh;
+    object-fit: contain;
   }
 
   .hero {
