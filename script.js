@@ -140,6 +140,12 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // Function to scroll to pricing section
+  function scrollToPricing() {
+    const pricingSection = document.getElementById("pricing");
+    pricingSection.scrollIntoView({ behavior: "smooth" });
+  }
+
   // Handle Form Submission
   document
     .getElementById("paymentForm")
@@ -207,6 +213,7 @@ window.addEventListener("DOMContentLoaded", () => {
   // Make functions globally accessible
   window.openPaymentModal = openPaymentModal;
   window.closePaymentModal = closePaymentModal;
+  window.scrollToPricing = scrollToPricing;
 
   // Check for any pending payment on page load
   const pendingPaymentId = localStorage.getItem("currentPaymentId");

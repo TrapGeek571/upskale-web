@@ -50,8 +50,9 @@ nav {
   right: 0;
   z-index: 100;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
+  gap: 2rem;
   padding: 1.25rem 5%;
   background: rgba(11, 61, 46, 0.96);
   backdrop-filter: blur(12px);
@@ -115,6 +116,48 @@ nav {
   height: 2px;
   background: var(--white);
   transition: 0.3s;
+}
+
+/* ── LOGO INTRO ── */
+.logo-intro {
+  min-height: 100vh;
+  background: var(--green-deep);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.logo-intro-inner {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeInUp 1s ease-out;
+}
+
+.logo-intro-img {
+  width: 100vw;
+  height: 100vh;
+  min-width: 100vw;
+  min-height: 100vh;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ── HERO ── */
@@ -1105,6 +1148,22 @@ footer {
     display: flex;
   }
 
+  .logo-intro {
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  .logo-intro-inner {
+    height: auto;
+    padding: 2rem 0;
+  }
+
+  .logo-intro-img {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+  }
+
   .hero {
     padding: 7rem 5% 4rem;
   }
@@ -1164,7 +1223,7 @@ footer {
 .logo-img {
   /* Increase this number until the logo looks right to you */
   height: auto;
-  width: 240px; /* Increased from 180px for better visibility */
+  width: 220px; /* Increased from 180px for better visibility */
   display: block;
   object-fit: contain;
 }
@@ -1172,7 +1231,7 @@ footer {
 /* On mobile, we usually want it slightly smaller to save screen space */
 @media (max-width: 768px) {
   .logo-img {
-    height: 50px;
+    height: 100px;
     width: 180px; /* Increased from 135px proportionally */
   }
 }

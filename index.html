@@ -16,16 +16,11 @@
   </head>
   <body>
     <nav>
-      <div class="nav-logo">
-        <a href="/">
-          <img src="assets/logo.png" alt="Upskale Logo" class="logo-img" />
-        </a>
-      </div>
       <ul class="nav-links">
         <li><a href="#how">How It Works</a></li>
         <li><a href="#consultants">Consultants</a></li>
         <li><a href="#pricing">Pricing</a></li>
-        <button onclick="openPaymentModal(3000)" class="btn-primary">
+        <button onclick="scrollToPricing()" class="btn-primary">
           Book a Session
         </button>
       </ul>
@@ -33,6 +28,12 @@
         <span></span><span></span><span></span>
       </div>
     </nav>
+
+    <section class="logo-intro">
+      <div class="logo-intro-inner">
+        <img src="assets/logo.png" alt="Upskale Logo" class="logo-intro-img" />
+      </div>
+    </section>
 
     <section class="hero">
       <div class="hero-inner">
@@ -259,9 +260,7 @@
               <span class="tag">Investor Pitch</span>
             </div>
             <button
-              onclick="
-                document.getElementById('paymentModal').style.display = 'flex'
-              "
+              onclick="scrollToPricing()"
               class="card-cta"
               style="width: 100%; border: none; cursor: pointer"
             >
@@ -285,9 +284,7 @@
               <span class="tag">Fundraising</span>
             </div>
             <button
-              onclick="
-                document.getElementById('paymentModal').style.display = 'flex'
-              "
+              onclick="scrollToPricing()"
               class="card-cta"
               style="width: 100%; border: none; cursor: pointer"
             >
@@ -311,9 +308,7 @@
               <span class="tag">Brand Identity</span>
             </div>
             <button
-              onclick="
-                document.getElementById('paymentModal').style.display = 'flex'
-              "
+              onclick="scrollToPricing()"
               class="card-cta"
               style="width: 100%; border: none; cursor: pointer"
             >
@@ -337,9 +332,7 @@
               <span class="tag">Process Design</span>
             </div>
             <button
-              onclick="
-                document.getElementById('paymentModal').style.display = 'flex'
-              "
+              onclick="scrollToPricing()"
               class="card-cta"
               style="width: 100%; border: none; cursor: pointer"
             >
@@ -363,9 +356,7 @@
               <span class="tag">Compliance</span>
             </div>
             <button
-              onclick="
-                document.getElementById('paymentModal').style.display = 'flex'
-              "
+              onclick="scrollToPricing()"
               class="card-cta"
               style="width: 100%; border: none; cursor: pointer"
             >
@@ -404,8 +395,8 @@
                 line-height: 1.6;
               "
             >
-              Join Upskale as a consultant and earn KES 2,100 per session on
-              your own schedule.
+              Join Upskale as a consultant and earn per session on your own
+              schedule.
             </p>
             <a
               href="mailto:hello@upskale.co.ke"
@@ -650,7 +641,6 @@
         inset: 0;
         background: rgba(0, 0, 0, 0.8);
         z-index: 1000;
-        display: flex;
         align-items: center;
         justify-content: center;
       "
