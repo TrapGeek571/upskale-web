@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Consultant Bookings | Upskale</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="main">
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="section-label">Consultant Dashboard</p>
+          <h1 class="hero-title">Your upcoming sessions</h1>
+          <p class="hero-sub">
+            View bookings assigned to your consultant account and access the
+            Zoom session link.
+          </p>
+        </div>
+      </section>
+
+      <section class="consultants" style="padding: 2rem 5%">
+        <div class="consultants-inner">
+          <div id="consultantHeader" class="reveal">
+            <p class="section-sub" id="consultantMessage"></p>
+          </div>
+
+          <div class="consultants-grid reveal">
+            <table class="admin-table" style="width: 100%; max-width: 100%">
+              <thead>
+                <tr>
+                  <th>Booking ID</th>
+                  <th>Phone</th>
+                  <th>Amount</th>
+                  <th>Status</th>
+                  <th>Receipt</th>
+                  <th>Session</th>
+                  <th>Zoom link</th>
+                </tr>
+              </thead>
+              <tbody id="bookingRows">
+                <tr>
+                  <td colspan="7">Loading bookings...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div style="margin-top: 1rem">
+            <a href="index.html" class="btn-outline">Return to website</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="consultant.js"></script>
+  </body>
+</html>

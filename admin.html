@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Upskale Admin Dashboard</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      body {
+        min-height: 100vh;
+        padding: 2rem;
+      }
+      .admin-header {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 1rem;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        background: #f9f7f1;
+        padding: 0.75rem 1rem;
+        border-radius: 8px;
+      }
+      .admin-header h1 {
+        margin: 0;
+        font-size: 1.8rem;
+        color: #0b3d2e;
+      }
+      .section-label {
+        color: #7a6a50;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+        margin-bottom: 0.25rem;
+      }
+      .admin-actions {
+        display: flex;
+        gap: 0.75rem;
+      }
+      .admin-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 1rem;
+      }
+      .admin-table th,
+      .admin-table td {
+        padding: 0.9rem 0.75rem;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        text-align: left;
+        vertical-align: top;
+        font-size: 0.95rem;
+      }
+      .admin-table th {
+        background: #f9f7f1;
+        color: #0b3d2e;
+      }
+      .admin-table tbody tr:nth-child(even) {
+        background: rgba(201, 168, 76, 0.08);
+      }
+      .admin-status {
+        margin-top: 1rem;
+        font-size: 0.95rem;
+      }
+      .admin-link {
+        color: #0b3d2e;
+        font-weight: 700;
+        text-decoration: none;
+      }
+      .admin-link:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="admin-header">
+      <div>
+        <p class="section-label">Admin</p>
+        <h1>Session bookings & Zoom links</h1>
+      </div>
+      <div class="admin-actions">
+        <button id="refreshPayments" class="btn-primary">Refresh</button>
+        <a href="index.html" class="btn-outline admin-link"
+          >Return to website</a
+        >
+      </div>
+    </div>
+
+    <div id="adminStatus" class="admin-status"></div>
+
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th>Payment ID</th>
+          <th>Phone</th>
+          <th>Amount</th>
+          <th>Consultant</th>
+          <th>Status</th>
+          <th>Receipt</th>
+          <th>Zoom link</th>
+          <th>Created</th>
+          <th>Completed</th>
+        </tr>
+      </thead>
+      <tbody id="paymentRows">
+        <tr>
+          <td colspan="9">Loading payments...</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <script src="admin.js"></script>
+  </body>
+</html>
